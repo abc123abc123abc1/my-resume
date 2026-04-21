@@ -1,88 +1,93 @@
+"use client"
+
 import { Card, CardContent } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Star } from "lucide-react"
+import { useLanguage } from "@/components/language-provider"
+import { WaSectionHeading } from "@/components/wa-section-heading"
 
 
 const testimonials = [
   {
-    name: "Sarah Johnson",
-    role: "CTO at TechCorp",
-    company: "TechCorp AI",
-    avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&fit=crop&crop=face",
-    rating: 5,
-    testimonial:
-      "Alex is an exceptional AI engineer who consistently delivers innovative solutions. His deep understanding of machine learning and ability to translate complex concepts into practical applications has been invaluable to our team.",
-  },
-  {
-    name: "Dr. Michael Chen",
-    role: "Research Director",
-    company: "InnovateLabs",
+    name: "Kenji Watanabe",
+    role: "CTO",
+    company: "Recursive AI",
     avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face",
     rating: 5,
     testimonial:
-      "Working with Alex was a pleasure. His research contributions in NLP and computer vision are outstanding. He has a rare combination of theoretical knowledge and practical implementation skills.",
+      "Eito is an exceptional Lead AI Engineer who consistently delivers beyond expectations. His multi-agent architecture expertise and ability to reduce Fortune 500 operational costs by 35% speaks for itself. Truly rare talent.",
   },
   {
-    name: "Emily Rodriguez",
-    role: "Product Manager",
-    company: "DataDriven Inc",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face",
+    name: "Yuki Tanaka",
+    role: "VP of Product",
+    company: "Recursive AI",
+    avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&fit=crop&crop=face",
     rating: 5,
     testimonial:
-      "Alex transformed our recommendation system, increasing user engagement by 40%. His ability to understand business requirements and translate them into effective ML solutions is remarkable.",
+      "Working with Eito on our RAG pipeline was remarkable. He designed a system achieving 92% semantic search accuracy across 10M+ documents. His technical depth combined with clear communication made him indispensable.",
   },
   {
-    name: "James Wilson",
-    role: "VP of Engineering",
-    company: "StartupXYZ",
+    name: "Haruto Nishimura",
+    role: "Director of Engineering",
+    company: "Tenchijin",
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face",
     rating: 5,
     testimonial:
-      "Alex established our entire data science infrastructure from scratch. His expertise in MLOps and system architecture helped us scale from prototype to production seamlessly.",
+      "Eito built our intelligent document understanding system from the ground up, achieving 94% extraction accuracy and processing 500K+ documents monthly. His NLP expertise transformed our European enterprise offering.",
   },
   {
-    name: "Dr. Lisa Park",
-    role: "AI Research Lead",
-    company: "University Research Lab",
-    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face",
+    name: "Sakura Ito",
+    role: "Senior Data Scientist",
+    company: "Tenchijin",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face",
     rating: 5,
     testimonial:
-      "Alex's contributions to our research projects were exceptional. His publications are well-cited and his innovative approaches to deep learning have influenced our entire research direction.",
+      "Eito's recommendation engine improved our clients' conversion rates by 28% and generated over $2M in additional revenue. He has a rare gift for translating complex ML theory into measurable business outcomes.",
   },
   {
-    name: "Robert",
-    role: "Senior Software Engineer",
-    company: "TechCorp AI",
+    name: "Takashi Mori",
+    role: "Head of AI",
+    company: "Citadel AI",
     avatar: "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=200&h=200&fit=crop&crop=face",
     rating: 5,
     testimonial:
-      "As a team lead, Alex is inspiring and supportive. He mentored me through complex ML projects and his code reviews always provided valuable insights. A true technical leader.",
+      "Eito's computer vision solutions achieved 96% detection accuracy and reduced manual inspection time by 75% for our manufacturing clients. He also saved $800K annually through predictive analytics. A high-impact engineer.",
+  },
+  {
+    name: "Aiko Yamamoto",
+    role: "Engineering Manager",
+    company: "Preferred Networks",
+    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face",
+    rating: 5,
+    testimonial:
+      "Eito mentored 5 junior engineers while building ETL pipelines processing 2M+ daily records with 99.7% data quality. As a team lead he is inspiring, thorough, and always raises the bar. A true technical leader.",
   },
 ]
 
 export function TestimonialsSection() {
-
+  const { t } = useLanguage()
 
   return (
-    <section id="testimonials" className="py-20">
+    <section id="testimonials" className="py-20 wa-graph-paper">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Testimonials</h2>
-          <p className="text-xl text-muted-foreground">What colleagues and clients say about working with me.</p>
-        </div>
+        <WaSectionHeading
+          kanji="声"
+          title={t.testimonials.title}
+          subtitle={t.testimonials.subtitle}
+        />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
+          {testimonials.map((testimonial, index: number) => (
             <Card key={index} className="h-full flex flex-col">
               <CardContent className="p-6 flex flex-col flex-grow">
                 <div className="flex items-center gap-1 mb-4 flex-shrink-0">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    <Star key={i} className="h-4 w-4 fill-red-600 text-red-600" />
                   ))}
                 </div>
 
                 <blockquote className="text-muted-foreground mb-6 italic flex-grow line-clamp-6">
-                  "{testimonial.testimonial}"
+                  「{t.testimonials.items[index] ?? testimonial.testimonial}」
                 </blockquote>
 
                 <div className="flex items-center gap-3 mt-auto flex-shrink-0">

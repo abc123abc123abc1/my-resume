@@ -24,6 +24,10 @@ const config: Config = {
       "2xl": "1536px",
     },
     extend: {
+      fontFamily: {
+        serif: ["var(--font-noto-serif-jp)", "var(--font-inter)", "serif"],
+        sans: ["var(--font-inter)", "sans-serif"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -57,6 +61,16 @@ const config: Config = {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        /* Traditional Japanese colors (和色) */
+        wa: {
+          red: "#C62828",       /* 紅 beni */
+          crimson: "#8D1515",   /* 深紅 shinku */
+          sakura: "#E8C4B8",    /* 桜 sakura */
+          navy: "#1B1B2F",      /* 紺 kon */
+          ink: "#0F0F1A",       /* 墨 sumi */
+          washi: "#FAF7F2",     /* 和紙 washi */
+          brown: "#8D6E63",     /* 土 tsuchi */
         },
       },
       borderRadius: {

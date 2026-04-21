@@ -1,15 +1,23 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Inter, Noto_Serif_JP } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { LanguageProvider } from "@/components/language-provider"
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
+
+const notoSerifJP = Noto_Serif_JP({
+  subsets: ["latin"],
+  weight: ["400", "500", "700", "900"],
+  variable: "--font-noto-serif-jp",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
-  title: "Alex Chen - Senior AI Engineer",
+  title: "Eito Shinokura - Lead AI/ML Engineer",
   description:
-    "Senior AI Engineer with 9 years of experience in machine learning, deep learning, and AI system architecture.",
+    "Lead AI/ML Engineer & AI Architect with 9+ years of experience in Generative AI, multi-agent LLM systems, and scalable MLOps infrastructure for Fortune 500 enterprises.",
   generator: 'v0.dev',
   icons: {
     icon: '/favicon.svg',
@@ -22,10 +30,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className} suppressHydrationWarning>
+    <html lang="ja" suppressHydrationWarning>
+      <body className={`${inter.variable} ${notoSerifJP.variable} font-serif`} suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          {children}
+          <LanguageProvider>
+            {children}
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

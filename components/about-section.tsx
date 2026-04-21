@@ -1,112 +1,88 @@
+"use client"
+
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Brain, Code, Database, Zap, Award, Users, Lightbulb, Target } from "lucide-react"
+import { useLanguage } from "@/components/language-provider"
+import { WaSectionHeading } from "@/components/wa-section-heading"
 
 const skills = [
   {
-    category: "Machine Learning",
-    items: ["TensorFlow", "PyTorch", "Scikit-learn", "Keras", "XGBoost"],
+    category: "LLM & GenAI",
+    items: ["LangChain", "LangGraph", "LlamaIndex", "CrewAI", "AutoGen"],
     icon: Brain,
-    color: "from-blue-500 to-purple-600",
+    color: "from-red-800 to-red-600",       /* 紅 beni */
   },
   {
-    category: "Deep Learning",
-    items: ["CNNs", "RNNs", "Transformers", "GANs", "BERT/GPT"],
+    category: "ML / Deep Learning",
+    items: ["PyTorch", "TensorFlow", "Transformers", "Scikit-learn", "XGBoost"],
     icon: Zap,
-    color: "from-purple-500 to-pink-600",
+    color: "from-purple-900 to-violet-700", /* 紫 murasaki */
   },
   {
-    category: "Programming",
-    items: ["Python", "JavaScript", "TypeScript", "R", "SQL"],
+    category: "MLOps & DevOps",
+    items: ["MLflow", "Weights & Biases", "Kubeflow", "Docker", "Kubernetes"],
     icon: Code,
-    color: "from-green-500 to-blue-600",
+    color: "from-emerald-900 to-green-700", /* 緑 midori */
   },
   {
-    category: "Cloud & MLOps",
-    items: ["AWS", "GCP", "Docker", "Kubernetes", "MLflow"],
+    category: "Cloud Platforms",
+    items: ["Azure ML", "AWS SageMaker", "Google Cloud", "Azure OpenAI", "AKS"],
     icon: Database,
-    color: "from-orange-500 to-red-600",
+    color: "from-indigo-900 to-blue-700",   /* 藍 ai */
   },
   {
-    category: "Data Engineering",
-    items: ["Apache Spark", "Airflow", "Kafka", "PostgreSQL", "MongoDB"],
+    category: "Backend & APIs",
+    items: ["FastAPI", "Django", "Flask", "PostgreSQL", "Redis"],
     icon: Target,
-    color: "from-teal-500 to-cyan-600",
+    color: "from-rose-800 to-red-700",      /* 茜 akane */
   },
   {
-    category: "AI Frameworks",
-    items: ["LangChain", "Hugging Face", "OpenAI API", "Anthropic", "Cohere"],
+    category: "Vector Databases",
+    items: ["Pinecone", "Weaviate", "FAISS", "Qdrant", "Milvus"],
     icon: Lightbulb,
-    color: "from-yellow-500 to-orange-600",
+    color: "from-amber-700 to-orange-600",  /* 橙 daidai */
   },
 ]
 
-const highlights = [
-  {
-    icon: Brain,
-    title: "AI Research",
-    description: "Published 15+ papers in top-tier conferences",
-    metric: "15+",
-    label: "Publications",
-  },
-  {
-    icon: Code,
-    title: "Production Systems",
-    description: "Deployed ML models serving 10M+ users",
-    metric: "10M+",
-    label: "Users Served",
-  },
-  {
-    icon: Database,
-    title: "Big Data",
-    description: "Processed petabytes of data for insights",
-    metric: "PB+",
-    label: "Data Processed",
-  },
-  {
-    icon: Award,
-    title: "Innovation",
-    description: "3 patents in AI and machine learning",
-    metric: "3",
-    label: "Patents",
-  },
-]
+const highlightIcons = [Brain, Code, Database, Award]
 
 export function AboutSection() {
+  const { t } = useLanguage()
+  const h = t.about.highlights
+
   return (
-    <section id="about" className="py-20 section-background relative overflow-hidden">
+    <section id="about" className="py-20 section-background wa-seigaiha relative overflow-hidden">
       {/* Decorative Elements */}
-      <div className="absolute top-10 right-10 animate-float opacity-20">
-        <Users className="h-16 w-16 text-blue-400" />
+      <div className="absolute top-10 right-10 animate-float opacity-10">
+        <Users className="h-16 w-16" style={{ color: 'rgba(198,40,40,0.5)' }} />
       </div>
-      <div className="absolute bottom-20 left-10 animate-float-delayed opacity-20">
-        <Lightbulb className="h-12 w-12 text-purple-400" />
+      <div className="absolute bottom-20 left-10 animate-float-delayed opacity-10">
+        <Lightbulb className="h-12 w-12" style={{ color: 'rgba(232,196,184,0.6)' }} />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <div className="text-center mb-20">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-6 gradient-text-rainbow animate-gradient">
-            About Me
-          </h2>
-          <p className="text-xl sm:text-2xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-            Passionate AI engineer dedicated to pushing the boundaries of artificial intelligence and machine learning.
-          </p>
-        </div>
+        <WaSectionHeading
+          kanji="人"
+          title={t.about.title}
+          subtitle={t.about.subtitle}
+        />
 
         {/* Main Content Grid */}
         <div className="grid lg:grid-cols-2 gap-16 mb-20">
           {/* Story Section */}
           <div>
-            <div className="glass-strong p-8 rounded-2xl border border-white/20 hover:border-white/30 transition-all duration-300">
+            <div className="glass-strong p-8 rounded-2xl wa-stationery transition-all duration-300">
               <h3 className="text-3xl font-semibold mb-8 gradient-text flex items-center gap-3">
                 <Users className="h-8 w-8" />
-                My Story
+                {t.about.myStory}
               </h3>
               <div className="space-y-6 text-muted-foreground leading-relaxed">
-                <p className="text-lg hover:text-foreground transition-colors duration-300">My journey in AI began 9 years ago when I was fascinated by the potential of machines to learn and adapt. Since then, I've dedicated my career to developing cutting-edge AI solutions that solve real-world problems.</p>
-                <p className="text-lg hover:text-foreground transition-colors duration-300">Throughout my career, I've had the privilege of working with leading tech companies and research institutions, contributing to breakthrough projects in computer vision, natural language processing, and autonomous systems.</p>
-                <p className="text-lg hover:text-foreground transition-colors duration-300">I believe in the transformative power of AI and am committed to building ethical, responsible AI systems that benefit humanity. When I'm not coding, you can find me mentoring aspiring AI engineers or contributing to open-source projects.</p>
+                {t.about.bio.map((paragraph, i) => (
+                  <p key={i} className="text-lg hover:text-foreground transition-colors duration-300">
+                    {paragraph}
+                  </p>
+                ))}
               </div>
             </div>
           </div>
@@ -114,25 +90,32 @@ export function AboutSection() {
           {/* Highlights Grid */}
           <div>
             <div className="grid grid-cols-2 gap-6">
-              {highlights.map((highlight, index) => (
-                <Card
+              {[
+                { icon: highlightIcons[0], metric: h.researchMetric, label: h.researchLabel, title: h.research, desc: h.researchDesc },
+                { icon: highlightIcons[1], metric: h.productionMetric, label: h.productionLabel, title: h.production, desc: h.productionDesc },
+                { icon: highlightIcons[2], metric: h.dataMetric, label: h.dataLabel, title: h.data, desc: h.dataDesc },
+                { icon: highlightIcons[3], metric: h.innovationMetric, label: h.innovationLabel, title: h.innovation, desc: h.innovationDesc },
+              ].map((highlight, index) => (
+                <div
                   key={index}
-                  className="card-hover glass-strong border-white/20 shadow-soft group cursor-pointer"
+                  className="card-hover bg-card border border-border/60 group cursor-pointer p-5 text-center"
+                  style={{ borderRadius: '2px' }}
                 >
-                  <CardContent className="p-6 text-center">
-                    <div className="p-4 bg-gradient-primary rounded-full w-fit mx-auto mb-4 group-hover:animate-wiggle">
-                      <highlight.icon className="h-8 w-8 text-gray-800 dark:text-white drop-shadow-lg" />
-                    </div>
-                    <div className="text-3xl font-bold gradient-text mb-2 group-hover:animate-pulse">
-                      {highlight.metric}
-                    </div>
-                    <div className="text-sm text-muted-foreground mb-2">{highlight.label}</div>
-                    <h4 className="font-semibold mb-2 gradient-text-secondary">{highlight.title}</h4>
-                    <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
-                      {highlight.description}
-                    </p>
-                  </CardContent>
-                </Card>
+                  {/* Red number — like a Japanese seal number */}
+                  <div
+                    className="text-3xl font-black mb-1 font-serif"
+                    style={{ color: '#C62828' }}
+                  >
+                    {highlight.metric}
+                  </div>
+                  <div className="wa-ink-rule mx-auto mb-3 opacity-40" style={{ maxWidth: '60px' }} />
+                  <div className="text-xs tracking-widest text-muted-foreground uppercase mb-2">
+                    {highlight.label}
+                  </div>
+                  <p className="text-xs text-muted-foreground group-hover:text-foreground transition-colors leading-relaxed">
+                    {highlight.desc}
+                  </p>
+                </div>
               ))}
             </div>
           </div>
@@ -143,44 +126,51 @@ export function AboutSection() {
           <div className="text-center mb-12">
             <h3 className="text-3xl font-semibold gradient-text-secondary flex items-center justify-center gap-3">
               <Code className="h-8 w-8" />
-              Technical Expertise
+              {t.about.techExpertise}
             </h3>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {skills.map((skillGroup, index) => {
               const IconComponent = skillGroup.icon
               return (
-                <Card
+                <div
                   key={index}
-                  className="card-hover glass-strong border-white/20 shadow-soft group overflow-hidden relative"
+                  className="card-hover bg-card border border-border/60 group overflow-hidden"
+                  style={{ borderRadius: '2px' }}
                 >
-                  {/* Gradient Background */}
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${skillGroup.color} opacity-5 group-hover:opacity-10 transition-opacity duration-300`}
-                  />
+                  {/* Colored top bar — category color */}
+                  <div className={`h-[3px] bg-gradient-to-r ${skillGroup.color}`} />
 
-                  <CardContent className="p-6 relative z-10">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className={`p-3 rounded-lg bg-gradient-to-r ${skillGroup.color} shadow-lg`}>
-                        <IconComponent className="h-6 w-6 text-white drop-shadow-sm" />
-                      </div>
-                      <h4 className="font-semibold text-lg gradient-text">{skillGroup.category}</h4>
+                  <div className="p-5">
+                    {/* Category label — Japanese product tag style */}
+                    <div className="flex items-center gap-2 mb-4">
+                      <IconComponent className="h-4 w-4 flex-shrink-0" style={{ color: 'rgba(198,40,40,0.6)' }} />
+                      <span
+                        className="text-xs font-bold tracking-[0.18em] uppercase"
+                        style={{ color: 'rgba(198,40,40,0.75)' }}
+                      >
+                        {skillGroup.category}
+                      </span>
                     </div>
-                    <div className="space-y-2">
+
+                    {/* Thin red rule under label */}
+                    <div className="wa-ink-rule mb-4 opacity-60" />
+
+                    {/* Skill chips — clean bordered tags */}
+                    <div className="flex flex-wrap gap-1.5">
                       {skillGroup.items.map((skill, skillIndex) => (
-                        <Badge
+                        <span
                           key={skillIndex}
-                          variant="secondary"
-                          className="mr-2 mb-2 bg-white/10 text-foreground border border-white/20 hover:bg-white/20 transition-colors group-hover:animate-pulse"
-                          style={{ animationDelay: `${skillIndex * 0.1}s` }}
+                          className="text-xs px-2.5 py-1 border border-border/70 text-muted-foreground hover:text-foreground hover:border-red-700/50 hover:bg-red-50/50 dark:hover:bg-red-950/20 transition-all duration-200"
+                          style={{ borderRadius: '1px', letterSpacing: '0.02em' }}
                         >
                           {skill}
-                        </Badge>
+                        </span>
                       ))}
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               )
             })}
           </div>

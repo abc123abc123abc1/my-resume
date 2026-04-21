@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge"
 import { MessageCircle, Send, X, Bot, User } from "lucide-react"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
+import { useLanguage } from "@/components/language-provider"
 
 
 interface Message {
@@ -21,42 +22,42 @@ interface Message {
 
 const portfolioKnowledge = {
   personal: {
-    name: "Alex Chen",
-    title: "Senior AI Engineer",
-    experience: "9 years",
-    location: "San Francisco, CA",
-    email: "alex.chen@email.com",
-    phone: "+1 (555) 123-4567",
+    name: "Eito Shinokura",
+    title: "Lead AI/ML Engineer & AI Architect",
+    experience: "9+ years",
+    location: "Tokyo, Japan",
+    email: "eitoshinokura118@outlook.com",
+    phone: "+81 80-7194-6496",
     availability: "Available for work",
   },
   skills: {
-    "Machine Learning": ["TensorFlow", "PyTorch", "Scikit-learn", "Keras", "XGBoost"],
-    "Deep Learning": ["CNNs", "RNNs", "Transformers", "GANs", "BERT/GPT"],
-    Programming: ["Python", "JavaScript", "TypeScript", "R", "SQL"],
-    "Cloud & MLOps": ["AWS", "GCP", "Docker", "Kubernetes", "MLflow"],
-    "Data Engineering": ["Apache Spark", "Airflow", "Kafka", "PostgreSQL", "MongoDB"],
-    "AI Frameworks": ["LangChain", "Hugging Face", "OpenAI API", "Anthropic", "Cohere"],
+    "LLM & GenAI": ["LangChain", "LangGraph", "LlamaIndex", "CrewAI", "AutoGen", "LangSmith"],
+    "ML / Deep Learning": ["PyTorch", "TensorFlow", "Transformers", "Scikit-learn", "XGBoost", "LightGBM"],
+    "MLOps & DevOps": ["MLflow", "Weights & Biases", "Kubeflow", "Docker", "Kubernetes", "GitHub Actions"],
+    "Cloud Platforms": ["Azure ML", "AWS SageMaker", "GCP", "Azure OpenAI", "AKS", "AWS EKS"],
+    "Backend & APIs": ["FastAPI", "Django", "Flask", "PostgreSQL", "Redis", "Celery"],
+    "Vector Databases": ["Pinecone", "Weaviate", "FAISS", "Qdrant", "Milvus", "Elasticsearch"],
   },
   experience: [
     {
-      title: "Senior AI Engineer",
-      company: "TechCorp AI",
-      period: "2021 - Present",
+      title: "Lead AI Engineer",
+      company: "Recursive AI",
+      period: "April 2024 – Present",
       achievements: [
-        "Architected ML pipeline serving 50M+ daily predictions",
-        "Led team of 8 engineers in computer vision solutions",
-        "Reduced model inference time by 60%",
-        "Implemented MLOps practices",
+        "Architected multi-agent LLM systems (LangGraph, CrewAI, AutoGen), reducing costs by 35% for Fortune 500 clients",
+        "Designed RAG pipelines with LlamaIndex + Pinecone/Weaviate, 92% accuracy across 10M+ documents",
+        "Engineered production AI agents (GPT-4, Claude 3.5, Gemini Pro) with 88% automation success rate",
+        "Cut MLOps deployment cycles from 3 weeks to 4 hours using Azure ML + MLflow",
       ],
     },
     {
-      title: "AI Research Engineer",
-      company: "InnovateLabs",
-      period: "2019 - 2021",
+      title: "Senior AI Engineer",
+      company: "Tenchijin",
+      period: "February 2022 – April 2024",
       achievements: [
-        "Published 8 papers in NIPS, ICML, and ICLR",
-        "Developed novel attention mechanism improving BERT by 15%",
-        "Created open-source library with 10K+ GitHub stars",
+        "Built BERT/RoBERTa/LayoutLM document understanding systems with 94% extraction accuracy",
+        "Orchestrated 4-language NLP pipelines with 91% accuracy using spaCy and Transformers",
+        "Developed PyTorch recommendation engines improving conversion rates by 28% and $2M+ revenue",
       ],
     },
   ],
@@ -76,23 +77,24 @@ const portfolioKnowledge = {
   ],
   education: [
     {
-      degree: "Ph.D. in Computer Science",
-      school: "Stanford University",
-      period: "2014 - 2016",
-      focus: "Machine Learning & Artificial Intelligence",
+      degree: "Master's Degree",
+      school: "The University of Tokyo",
+      period: "2016 – 2018",
+      focus: "Information Science & Technology",
     },
     {
-      degree: "M.S. in Computer Science",
-      school: "MIT",
-      period: "2012 - 2014",
-      focus: "Artificial Intelligence",
+      degree: "Bachelor's Degree",
+      school: "Tokyo Institute of Technology",
+      period: "2012 – 2016",
+      focus: "Computer Science & Engineering",
     },
   ],
   certifications: [
+    "Microsoft Azure AI Engineer Associate (AZ-102)",
+    "Azure Solutions Architect Expert (AZ-305)",
     "AWS Certified Machine Learning - Specialty",
     "Google Cloud Professional ML Engineer",
-    "TensorFlow Developer Certificate",
-    "Deep Learning Specialization (Coursera)",
+    "Certified Kubernetes Administrator (CKA)",
   ],
 }
 
@@ -101,96 +103,96 @@ function generateBotResponse(userMessage: string): string {
 
   // Personal information
   if (message.includes("name") || message.includes("who are you")) {
-    return `Hi! I'm Alex Chen, a Senior AI Engineer with 9 years of experience in machine learning, deep learning, and AI system architecture. I'm passionate about creating intelligent solutions that make a real impact.`
+    return `Hi! I'm Eito Shinokura, a Lead AI/ML Engineer & AI Architect with 9+ years of experience specializing in Generative AI, multi-agent LLM systems, and production-grade MLOps infrastructure. Based in Tokyo, Japan, I've delivered AI solutions for Fortune 500 enterprises across finance, HR, and operations.`
   }
 
   if (message.includes("contact") || message.includes("email") || message.includes("phone")) {
-    return `You can reach Alex at:\n📧 Email: alex.chen@email.com\n📞 Phone: +1 (555) 123-4567\n📍 Location: San Francisco, CA\n\nAlex is currently available for new opportunities!`
+    return `You can reach Eito at:\n📧 Email: eitoshinokura118@outlook.com\n📞 Phone: +81 80-7194-6496\n📍 Location: Tokyo, Japan\n\nEito is currently available for new opportunities!`
   }
 
   if (message.includes("available") || message.includes("hire") || message.includes("work")) {
-    return `Yes! Alex is currently available for work and open to new opportunities. He's particularly interested in AI/ML engineering roles, research positions, and consulting projects. Feel free to reach out to discuss potential collaborations!`
+    return `Yes! Eito is currently available for work and open to new opportunities. He's particularly interested in Lead AI/ML Engineering roles, AI Architecture consulting, and enterprise AI transformation projects. Feel free to reach out to discuss potential collaborations!`
   }
 
   // Skills and expertise
   if (message.includes("skill") || message.includes("technology") || message.includes("programming")) {
-    return `Alex has expertise in:
+    return `Eito has expertise in:
 
-🤖 **Machine Learning**: TensorFlow, PyTorch, Scikit-learn, Keras, XGBoost
+🤖 **LLM & GenAI**: LangChain, LangGraph, LlamaIndex, CrewAI, AutoGen, LangSmith
 
-🧠 **Deep Learning**: CNNs, RNNs, Transformers, GANs, BERT/GPT
+🧠 **ML / Deep Learning**: PyTorch, TensorFlow, Transformers, Scikit-learn, XGBoost, LightGBM
 
-💻 **Programming**: Python, JavaScript, TypeScript, R, SQL
+☁️ **Cloud Platforms**: Azure ML, AWS SageMaker, GCP, Azure OpenAI, AKS
 
-☁️ **Cloud & MLOps**: AWS, GCP, Docker, Kubernetes, MLflow
+🔧 **MLOps & DevOps**: MLflow, Weights & Biases, Kubeflow, Docker, Kubernetes
 
-📊 **Data Engineering**: Apache Spark, Airflow, Kafka, PostgreSQL
+💾 **Vector Databases**: Pinecone, Weaviate, FAISS, Qdrant, Milvus
 
-🔧 **AI Frameworks**: LangChain, Hugging Face, OpenAI API, Anthropic`
+🖥️ **Backend & APIs**: FastAPI, Django, Flask, PostgreSQL, Redis`
   }
 
   if (message.includes("python") || message.includes("tensorflow") || message.includes("pytorch")) {
-    return `Alex is highly proficient in Python and deep learning frameworks! He has extensive experience with TensorFlow and PyTorch, having used them to build production ML systems serving millions of users. He's also skilled in Keras, Scikit-learn, and other ML libraries.`
+    return `Eito is highly proficient in Python and deep learning frameworks! He has extensive experience with PyTorch and TensorFlow, building production LLM agents, RAG pipelines, and NLP systems. He also uses LangChain, LlamaIndex, and HuggingFace Transformers extensively for Generative AI work.`
   }
 
-  if (message.includes("aws") || message.includes("cloud") || message.includes("gcp")) {
-    return `Alex has strong cloud expertise! He's AWS Certified in Machine Learning and experienced with Google Cloud Platform. He's built scalable ML pipelines using Docker, Kubernetes, and MLflow for MLOps. His cloud experience includes deploying models that serve 50M+ daily predictions.`
+  if (message.includes("aws") || message.includes("cloud") || message.includes("azure") || message.includes("gcp")) {
+    return `Eito has strong multi-cloud expertise! He holds Azure AI Engineer Associate and Azure Solutions Architect Expert certifications, plus AWS ML Specialty. He's built production AI systems on Azure ML, AWS SageMaker, and GCP, deploying fine-tuned LLMs on Kubernetes with vLLM reducing inference costs by 45%.`
   }
 
   // Experience
   if (message.includes("experience") || message.includes("work") || message.includes("job")) {
-    return `Alex has 9 years of AI/ML experience:
+    return `Eito has 9+ years of AI/ML experience:
 
-🏢 **Senior AI Engineer** at TechCorp AI (2021-Present)
-- Led ML pipeline serving 50M+ daily predictions
-- Managed team of 8 engineers
-- Reduced inference time by 60%
+🤖 **Lead AI Engineer** at Recursive AI (April 2024–Present)
+- Multi-agent LLM systems reducing costs by 35% for Fortune 500 clients
+- RAG pipelines achieving 92% accuracy across 10M+ documents
+- 88% automation success rate in production
 
-🔬 **AI Research Engineer** at InnovateLabs (2019-2021)
-- Published 8 papers in top conferences
-- Developed novel attention mechanisms
-- Created open-source library with 10K+ stars`
+🏭 **Senior AI Engineer** at Tenchijin (Feb 2022–Apr 2024)
+- Document understanding systems with 94% extraction accuracy
+- PyTorch recommendation engines generating $2M+ revenue
+
+🔬 **AI Engineer** at Citadel AI (Feb 2018–Jan 2022)
+- Computer vision with 96% detection accuracy
+- $800K annual cost savings via predictive analytics`
   }
 
   if (message.includes("research") || message.includes("paper") || message.includes("publication")) {
-    return `Alex has a strong research background! He's published 15+ papers in top-tier conferences including NIPS, ICML, and ICLR. His research focuses on transformer architectures, attention mechanisms, and practical AI applications. He's also contributed to open-source projects with thousands of GitHub stars.`
+    return `Eito's expertise is focused on applied AI engineering rather than academic research. He builds production-grade AI systems — from multi-agent LLM architectures and RAG pipelines to computer vision systems and NLP engines — that drive measurable business outcomes for Fortune 500 companies.`
   }
 
   // Projects
   if (message.includes("project") || message.includes("portfolio") || message.includes("built")) {
-    return `Alex has worked on amazing projects! Here are some highlights:
+    return `Eito has worked on impactful AI projects! Here are highlights from his portfolio:
 
-🔧 **AI-Powered Code Assistant**: VS Code extension with 100K+ users and 4.8/5 rating
+🤖 **Multi-Agent LLM System**: Automates finance/HR workflows for Fortune 500 clients, 35% cost reduction
 
-🛡️ **Fraud Detection System**: Real-time ML system preventing $50M+ in fraud
+📄 **RAG Pipeline**: 92% semantic search accuracy across 10M+ enterprise documents using LlamaIndex + Pinecone
 
-🏥 **Medical Imaging AI**: Computer vision for medical scans with 95% sensitivity
+🏭 **Document Intelligence**: BERT/LayoutLM system processing 500K+ business documents monthly at 94% accuracy
 
-🤖 **Natural Language Query Engine**: Text-to-SQL with 90%+ accuracy
+👁️ **Computer Vision**: YOLO/ResNet system with 96% detection accuracy reducing inspection time by 75%
 
-🚁 **Autonomous Drone Navigation**: Published in ICRA 2023`
+💡 **Recommendation Engine**: PyTorch model improving conversion rates by 28% and generating $2M+ revenue`
   }
 
-  if (message.includes("fraud") || message.includes("detection")) {
-    return `The fraud detection system is one of Alex's proudest achievements! It processes over 1M transactions per day with sub-100ms latency and 99.7% accuracy. Built using Python, Apache Kafka, Redis, TensorFlow, and Kubernetes, it has prevented over $50M in fraud losses.`
+  if (message.includes("rag") || message.includes("llm") || message.includes("langchain") || message.includes("agent")) {
+    return `Eito is an expert in LLM and Generative AI! At Recursive AI he architected multi-agent systems using LangGraph, CrewAI, and AutoGen to automate enterprise workflows. He also built RAG pipelines with LlamaIndex integrating Pinecone and Weaviate vector databases, achieving 92% accuracy across 10M+ enterprise documents.`
   }
 
   // Education
   if (message.includes("education") || message.includes("degree") || message.includes("university")) {
-    return `Alex has an impressive educational background:
+    return `Eito's academic background from Japan's top universities:
 
-🎓 **Ph.D. in Computer Science** - Stanford University (2014-2016)
-   Focus: Machine Learning & Artificial Intelligence
+🏛️ **Master's Degree** - The University of Tokyo (2016–2018)
+   Focus: Information Science & Technology
 
-🏛️ **M.S. in Computer Science** - MIT (2012-2014)
-   Focus: Artificial Intelligence
-
-🐻 **B.S. in Computer Science** - UC Berkeley (2008-2012)
-   Focus: Computer Science & Mathematics`
+🏫 **Bachelor's Degree** - Tokyo Institute of Technology (2012–2016)
+   Focus: Computer Science & Engineering`
   }
 
-  if (message.includes("stanford") || message.includes("mit") || message.includes("berkeley")) {
-    return `Alex studied at top universities! He earned his Ph.D. from Stanford University focusing on Machine Learning & AI, his Master's from MIT in Artificial Intelligence, and his Bachelor's from UC Berkeley in Computer Science & Mathematics. He graduated with high honors from all institutions.`
+  if (message.includes("tokyo") || message.includes("japan") || message.includes("university")) {
+    return `Eito is based in Tokyo, Japan, and studied at two of Japan's most prestigious universities — The University of Tokyo (Master's in Information Science) and Tokyo Institute of Technology (Bachelor's in Computer Science & Engineering). His deep roots in Japan's tech ecosystem inform his work across enterprise AI projects throughout Asia and Europe.`
   }
 
   // Certifications
@@ -268,12 +270,12 @@ What specific aspect interests you most?`
 }
 
 export function ChattingComponent() {
+  const { t } = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      content:
-        "Hi! I'm Alex Chen's AI assistant. I can answer questions about his experience, skills, projects, and background. What would you like to know?",
+      content: t.chatbot.greeting,
       isBot: true,
       timestamp: new Date(),
     },
@@ -295,8 +297,7 @@ export function ChattingComponent() {
     setMessages([
       {
         id: "1",
-        content:
-          "Hi! I'm Alex Chen's AI assistant. I can answer questions about his experience, skills, projects, and background. What would you like to know?",
+        content: t.chatbot.greeting,
         isBot: true,
         timestamp: new Date(),
       },
@@ -369,10 +370,10 @@ export function ChattingComponent() {
                 <Bot className="h-4 w-4 text-foreground dark:text-white" />
               </div>
               <div>
-                <CardTitle className="text-sm gradient-text">Alex's AI Assistant</CardTitle>
+                <CardTitle className="text-sm gradient-text">{t.chatbot.title}</CardTitle>
                 <div className="flex items-center gap-1 text-xs text-muted-foreground">
                   <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                  <span>Online</span>
+                  <span>{t.chatbot.online}</span>
                 </div>
               </div>
             </div>
@@ -384,7 +385,7 @@ export function ChattingComponent() {
                 className="h-8 px-2 text-xs hover:bg-adaptive-hover text-muted-foreground hover:text-foreground transition-colors"
                 title="Start new chat"
               >
-                New Chat
+                {t.chatbot.newChat}
               </Button>
               <Button
                 variant="ghost"
@@ -480,7 +481,7 @@ export function ChattingComponent() {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Ask about Alex's experience, skills, projects..."
+              placeholder={t.chatbot.placeholder}
               className="form-input flex-1 text-sm"
               disabled={isTyping}
             />
@@ -495,7 +496,7 @@ export function ChattingComponent() {
 
           {/* Quick suggestions */}
           <div className="flex flex-wrap gap-1 mt-2">
-            {["Skills", "Experience", "Projects", "Contact"].map((suggestion) => (
+            {t.chatbot.suggestions.map((suggestion) => (
               <Badge
                 key={suggestion}
                 variant="outline"

@@ -10,6 +10,8 @@ import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism"
 import remarkGfm from "remark-gfm"
 
 import { useState, useEffect } from "react"
+import { useLanguage } from "@/components/language-provider"
+import { WaSectionHeading } from "@/components/wa-section-heading"
 
 const blogPosts = [
   {
@@ -258,10 +260,10 @@ Responsible AI is not a destination but a continuous journey of improvement.
     author: "Alex Chen",
   },
 ]
-const categories = ["All", "AI Research", "MLOps", "Computer Vision", "Deep Learning", "Career", "AI Ethics"]
+const categoryKeys = ["All", "AI Research", "MLOps", "Computer Vision", "Deep Learning", "Career", "AI Ethics"] as const
 
 export function BlogSection() {
-
+  const { t } = useLanguage()
   const [selectedCategory, setSelectedCategory] = useState("All")
   const [selectedPost, setSelectedPost] = useState<(typeof blogPosts)[0] | null>(null)
 
@@ -283,7 +285,7 @@ export function BlogSection() {
 
   if (selectedPost) {
     return (
-      <section id="blog" className="py-20 section-background">
+      <section id="blog" className="py-20 section-background wa-graph-paper">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             {/* Back Button */}
@@ -293,7 +295,7 @@ export function BlogSection() {
               className="mb-8 glass border-white/20 hover:bg-white/10"
             >
               <ArrowRight className="h-4 w-4 mr-2 rotate-180" />
-              Back to Blog
+              {t.blog.back}
             </Button>
 
             {/* Article Header */}
@@ -388,33 +390,33 @@ export function BlogSection() {
   }
 
   return (
-    <section id="blog" className="py-20 section-background">
+    <section id="blog" className="py-20 section-background wa-graph-paper">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4 gradient-text">AI Insights & Technical Articles</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Exploring the latest in AI research, sharing practical insights, and discussing the future of artificial
-            intelligence.
-          </p>
-        </div>
+        <WaSectionHeading
+          kanji="記"
+          title={t.blog.title}
+          subtitle={t.blog.subtitle}
+        />
 
         {/* Category Filter */}
         <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {categories.map((category) => (
-            <Button
-              key={category}
-              variant={selectedCategory === category ? "default" : "outline"}
-              onClick={() => setSelectedCategory(category)}
-              className={`${
-                selectedCategory === category
-                  ? "button-gradient text-white border-0"
-                  : "glass border-white/20 hover:bg-white/10 bg-transparent"
-              } transition-all duration-300`}
-            >
-              {category}
-            </Button>
-          ))}
+          {categoryKeys.map((category) => {
+            const label = category === "All" ? t.blog.all : (t.blog.categories[category as keyof typeof t.blog.categories] ?? category)
+            return (
+              <Button
+                key={category}
+                variant={selectedCategory === category ? "default" : "outline"}
+                onClick={() => setSelectedCategory(category)}
+                className={`${
+                  selectedCategory === category
+                    ? "button-gradient text-white border-0"
+                    : "glass border-white/20 hover:bg-white/10 bg-transparent"
+                } transition-all duration-300`}
+              >
+                {label}
+              </Button>
+            )
+          })}
         </div>
 
         {/* Featured Posts */}
@@ -422,7 +424,7 @@ export function BlogSection() {
           <div className="mb-16">
             <h3 className="text-2xl font-semibold mb-8 gradient-text-secondary flex items-center gap-3">
               <TrendingUp className="h-6 w-6" />
-              Featured Articles
+              {t.blog.featured}
             </h3>
             <div className="grid md:grid-cols-2 gap-8">
               {featuredPosts.map((post) => (
@@ -438,7 +440,7 @@ export function BlogSection() {
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                    <Badge className="absolute top-4 left-4 bg-primary text-primary-foreground border-0 shadow-md">Featured</Badge>
+                    <Badge className="absolute top-4 left-4 bg-primary text-primary-foreground border-0 shadow-md">{t.blog.featured}</Badge>
                   </div>
                   <CardHeader>
                     <div className="flex items-center gap-2 mb-2">
@@ -453,18 +455,18 @@ export function BlogSection() {
                       </div>
                     </div>
                     <CardTitle className="text-xl gradient-text group-hover:gradient-text-secondary transition-all duration-300">
-                      {post.title}
+                      {t.blog.posts[post.id - 1]?.title ?? post.title}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-muted-foreground mb-4 leading-relaxed">{post.excerpt}</p>
+                    <p className="text-muted-foreground mb-4 leading-relaxed">{t.blog.posts[post.id - 1]?.excerpt ?? post.excerpt}</p>
                     <div className="flex items-center justify-end">
                       <Button
                         variant="ghost"
                         size="sm"
                         className="group-hover:translate-x-1 transition-transform duration-300"
                       >
-                        Read More
+                        {t.blog.readMore}
                         <ArrowRight className="h-4 w-4 ml-2" />
                       </Button>
                     </div>

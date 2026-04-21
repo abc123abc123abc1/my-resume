@@ -3,26 +3,26 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/mode-toggle"
-
+import { LanguageToggle } from "@/components/language-toggle"
+import { useLanguage } from "@/components/language-provider"
 import { Menu, X, Sparkles } from "lucide-react"
 
-
-const navigation = [
-  { name: "home", href: "#home" },
-  { name: "about", href: "#about" },
-  { name: "experience", href: "#experience" },
-  { name: "projects", href: "#projects" },
-  { name: "education", href: "#education" },
-  { name: "certificates", href: "#certificates" },
-  { name: "testimonials", href: "#testimonials" },
-  { name: "blog", href: "#blog" },
-  { name: "contact", href: "#contact" },
-]
+const navKeys = [
+  "home", "about", "experience", "projects",
+  "education", "certificates", "contact",
+] as const
 
 export function Header() {
+  const { t } = useLanguage()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState("home")
+
+  const navigation = navKeys.map((key) => ({
+    name: t.nav[key],
+    href: `#${key}`,
+    key,
+  }))
 
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export function Header() {
       setIsScrolled(window.scrollY > 50)
 
       // Update active section based on scroll position
-      const sections = navigation.map((item) => item.href.substring(1))
+      const sections = navKeys.map((k) => k)
       const currentSection = sections.find((section) => {
         const element = document.getElementById(section)
         if (element) {
@@ -80,8 +80,8 @@ export function Header() {
             onClick={() => scrollToSection("#home")}
             className="flex items-center gap-2 group cursor-pointer bg-transparent border-none p-0 hover:scale-105 transition-transform duration-300 flex-shrink-0"
           >
-            <div className="text-lg sm:text-xl lg:text-2xl font-bold gradient-text-rainbow animate-gradient hover:animate-wiggle transition-all duration-300">
-              Alex Chen
+            <div className="text-lg sm:text-xl lg:text-2xl font-bold gradient-text animate-gradient hover:animate-wiggle transition-all duration-300 tracking-wide">
+              Eito Shinokura
             </div>
             <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-primary group-hover:animate-wiggle" />
           </button>
@@ -90,10 +90,10 @@ export function Header() {
           <nav className="hidden lg:flex space-x-1">
             {navigation.map((item) => (
               <button
-                key={item.name}
+                key={item.key}
                 onClick={() => scrollToSection(item.href)}
-                className={`relative px-3 lg:px-4 py-2 text-sm font-medium transition-all duration-300 capitalize rounded-lg group ${
-                  activeSection === item.href.substring(1)
+                className={`relative px-3 lg:px-4 py-2 text-sm font-medium transition-all duration-300 rounded-lg group ${
+                  activeSection === item.key
                     ? "text-primary bg-primary/10"
                     : "text-muted-foreground hover:text-foreground"
                 }`}
@@ -101,10 +101,10 @@ export function Header() {
                 {item.name}
                 <span
                   className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-primary transition-all duration-300 group-hover:w-full ${
-                    activeSection === item.href.substring(1) ? "w-full" : ""
+                    activeSection === item.key ? "w-full" : ""
                   }`}
                 />
-                {activeSection === item.href.substring(1) && (
+                {activeSection === item.key && (
                   <div className="absolute inset-0 bg-gradient-primary opacity-10 rounded-lg animate-pulse" />
                 )}
               </button>
@@ -113,6 +113,7 @@ export function Header() {
 
           {/* Controls */}
           <div className="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
+            <LanguageToggle />
             <ModeToggle />
 
             {/* Mobile menu button */}
@@ -141,10 +142,10 @@ export function Header() {
               <nav className="flex flex-col space-y-2 px-2">
                 {navigation.map((item, index) => (
                   <button
-                    key={item.name}
+                    key={item.key}
                     onClick={() => scrollToSection(item.href)}
-                    className={`text-left px-4 py-3 text-sm font-medium transition-all duration-300 capitalize rounded-lg hover:bg-white/10 ${
-                      activeSection === item.href.substring(1)
+                    className={`text-left px-4 py-3 text-sm font-medium transition-all duration-300 rounded-lg hover:bg-white/10 ${
+                      activeSection === item.key
                         ? "text-primary bg-primary/10"
                         : "text-muted-foreground hover:text-foreground"
                     }`}

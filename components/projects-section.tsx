@@ -1,7 +1,11 @@
+"use client"
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ExternalLink } from "lucide-react"
+import { useLanguage } from "@/components/language-provider"
+import { WaSectionHeading } from "@/components/wa-section-heading"
 
 
 const projects = [
@@ -38,16 +42,19 @@ const projects = [
 ]
 
 export function ProjectsSection() {
+  const { t } = useLanguage()
+
   return (
-    <section id="projects" className="py-20 section-background">
+    <section id="projects" className="py-20 section-background wa-seigaiha">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Featured Projects</h2>
-          <p className="text-xl text-muted-foreground">Showcasing innovative AI solutions that make a real impact.</p>
-        </div>
+        <WaSectionHeading
+          kanji="業"
+          title={t.projects.title}
+          subtitle={t.projects.subtitle}
+        />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+          {projects.map((project, index: number) => (
             <Card
               key={index}
               className="overflow-hidden card-hover glass border-white/10 shadow-colored group h-full flex flex-col"
@@ -61,15 +68,15 @@ export function ProjectsSection() {
                 <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
               </div>
               <CardHeader>
-                <CardTitle className="text-xl gradient-text">{project.title}</CardTitle>
-                <p className="text-muted-foreground">{project.description}</p>
+                <CardTitle className="text-xl gradient-text">{t.projects.items[index]?.title ?? project.title}</CardTitle>
+                <p className="text-muted-foreground">{t.projects.items[index]?.description ?? project.description}</p>
               </CardHeader>
               <CardContent className="flex-grow flex flex-col">
                 <div className="space-y-4 flex-grow">
                   <div>
-                    <h4 className="font-semibold mb-2 gradient-text-secondary">Key Achievements</h4>
+                    <h4 className="font-semibold mb-2 gradient-text-secondary">{t.projects.keyAchievements}</h4>
                     <ul className="space-y-1">
-                      {project.achievements.map((achievement, achIndex) => (
+                      {(t.projects.items[index]?.achievements ?? project.achievements).map((achievement, achIndex) => (
                         <li key={achIndex} className="flex items-start gap-2 text-sm">
                           <div className="w-1.5 h-1.5 bg-gradient-primary rounded-full mt-2 flex-shrink-0" />
                           <span className="text-muted-foreground">{achievement}</span>
@@ -79,13 +86,13 @@ export function ProjectsSection() {
                   </div>
 
                   <div>
-                    <h4 className="font-semibold mb-2">Technologies</h4>
+                    <h4 className="font-semibold mb-2">{t.projects.technologies}</h4>
                     <div className="flex flex-wrap gap-1">
                       {project.technologies.map((tech, techIndex) => (
                         <Badge
                           key={techIndex}
                           variant="secondary"
-                          className="text-xs bg-gradient-accent text-gray-900 dark:text-white border-0"
+                          className="text-xs bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300 border-0"
                         >
                           {tech}
                         </Badge>
@@ -98,11 +105,11 @@ export function ProjectsSection() {
                   <Button
                     asChild
                     size="sm"
-                    className="w-full button-gradient text-gray-900 dark:text-white border-0"
+                    className="w-full button-gradient text-white border-0"
                   >
                     <a href={project.demo} target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="h-4 w-4 mr-2" />
-                      Demo
+                      {t.projects.demo}
                     </a>
                   </Button>
                 </div>

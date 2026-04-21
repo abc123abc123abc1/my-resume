@@ -4,7 +4,6 @@ import { ExperienceSection } from "@/components/experience-section"
 import { ProjectsSection } from "@/components/projects-section"
 import { EducationSection } from "@/components/education-section"
 import { CertificatesSection } from "@/components/certificates-section"
-import { TestimonialsSection } from "@/components/testimonials-section"
 import { NoSSR } from "@/components/no-ssr"
 
 export default function Home() {
@@ -12,12 +11,17 @@ export default function Home() {
     <main className="min-h-screen bg-background">
       <NoSSR fallback={<div className="min-h-screen bg-background animate-pulse" />}>
         <ClientWrapper />
+        <div className="wa-ink-rule" />
         <AboutSection />
+        <div className="wa-ink-rule" />
         <ExperienceSection />
+        <div className="wa-ink-rule" />
         <ProjectsSection />
+        <div className="wa-ink-rule" />
         <EducationSection />
+        <div className="wa-ink-rule" />
         <CertificatesSection />
-        <TestimonialsSection />
+        <div className="wa-ink-rule" />
         <ClientSections />
       </NoSSR>
     </main>

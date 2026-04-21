@@ -1,99 +1,86 @@
+"use client"
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, MapPin, Award, BookOpen, Users } from "lucide-react"
+import { useLanguage } from "@/components/language-provider"
+import { WaSectionHeading } from "@/components/wa-section-heading"
 
 
 const education = [
   {
-    degree: "Ph.D. in Computer Science",
-    school: "Stanford University",
-    location: "Stanford, CA",
-    period: "2014 - 2016",
-    gpa: "3.9/4.0",
-    focus: "Machine Learning & Artificial Intelligence",
-    thesis: "Deep Reinforcement Learning for Autonomous Systems",
+    degree: "Master's Degree",
+    school: "The University of Tokyo",
+    location: "Tokyo, Japan",
+    period: "2016 – 2018",
+    gpa: "",
+    focus: "Information Science & Technology",
+    thesis: "",
     achievements: [
-      "Summa Cum Laude",
-      "Outstanding Graduate Student Award",
-      "Published 12 papers during PhD",
-      "Teaching Assistant for ML courses",
-    ],
-    icon: "🎓",
-    color: "from-red-500 to-orange-500",
-    level: "Doctoral",
-  },
-  {
-    degree: "M.S. in Computer Science",
-    school: "MIT",
-    location: "Cambridge, MA",
-    period: "2012 - 2014",
-    gpa: "3.8/4.0",
-    focus: "Artificial Intelligence",
-    thesis: "Neural Networks for Natural Language Processing",
-    achievements: [
-      "Dean's List all semesters",
-      "Research Assistant in AI Lab",
-      "Winner of MIT AI Competition 2013",
-      "President of Graduate AI Society",
+      "Graduate School of Information Science and Technology",
+      "Specialized in Machine Learning and Intelligent Systems",
+      "Research in applied AI and computational data analysis",
+      "Foundation for advanced LLM and NLP expertise",
     ],
     icon: "🏛️",
-    color: "from-blue-500 to-indigo-500",
+    color: "from-red-800 to-rose-600",
     level: "Master's",
   },
   {
-    degree: "B.S. in Computer Science",
-    school: "UC Berkeley",
-    location: "Berkeley, CA",
-    period: "2008 - 2012",
-    gpa: "3.7/4.0",
-    focus: "Computer Science & Mathematics",
-    thesis: "Machine Learning Applications in Data Mining",
+    degree: "Bachelor's Degree",
+    school: "Tokyo Institute of Technology",
+    location: "Tokyo, Japan",
+    period: "2012 – 2016",
+    gpa: "",
+    focus: "Computer Science & Engineering",
+    thesis: "",
     achievements: [
-      "Magna Cum Laude",
-      "Phi Beta Kappa Honor Society",
-      "ACM Programming Contest Finalist",
-      "Undergraduate Research Scholar",
+      "School of Computing — Computer Science & Engineering",
+      "Strong foundation in mathematics, algorithms, and systems",
+      "Coursework in data structures, AI fundamentals, and software engineering",
+      "Developed early ML and programming expertise",
     ],
     icon: "🏫",
-    color: "from-yellow-500 to-orange-500",
+    color: "from-amber-600 to-yellow-500",
     level: "Bachelor's",
   },
 ]
 
 const relevantCourses = [
   {
-    category: "Core AI",
-    courses: ["Machine Learning", "Deep Learning", "Computer Vision", "Natural Language Processing"],
+    category: "Core AI / ML",
+    courses: ["Machine Learning", "Deep Learning", "Natural Language Processing", "Computer Vision"],
   },
   {
-    category: "Advanced Topics",
-    courses: ["Reinforcement Learning", "Statistical Learning Theory", "Neural Networks"],
+    category: "Generative AI",
+    courses: ["Large Language Models", "Transformer Architecture", "Prompt Engineering", "RAG Systems"],
   },
-  { category: "Mathematics", courses: ["Linear Algebra", "Probability & Statistics", "Optimization Theory"] },
-  { category: "Systems", courses: ["Data Structures & Algorithms", "Distributed Systems", "Database Systems"] },
+  { category: "Systems & Engineering", courses: ["Distributed Systems", "Database Systems", "MLOps & CI/CD", "Cloud Architecture"] },
+  { category: "Mathematics", courses: ["Linear Algebra", "Probability & Statistics", "Optimization Theory", "Information Theory"] },
 ]
 
 export function EducationSection() {
-
+  const { t } = useLanguage()
 
   return (
-    <section id="education" className="py-20 relative overflow-hidden">
+    <section id="education" className="py-20 relative overflow-hidden wa-graph-paper">
       {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/50 via-blue-50/30 to-cyan-50/50 dark:from-indigo-950/20 dark:via-blue-950/10 dark:to-cyan-950/20"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-red-50/25 via-transparent to-amber-50/20 dark:from-red-950/10 dark:via-transparent dark:to-amber-950/08"></div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4 gradient-text">Education</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">Academic foundation in computer science and artificial intelligence.</p>
-        </div>
+        <WaSectionHeading
+          kanji="学"
+          title={t.education.title}
+          subtitle={t.education.subtitle}
+        />
 
         {/* Education Timeline */}
         <div className="relative max-w-5xl mx-auto mb-16">
           {/* Timeline line */}
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-indigo-500 via-blue-500 to-cyan-500 md:-translate-x-px"></div>
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-red-700 via-rose-500 to-amber-500 md:-translate-x-px"></div>
 
           <div className="space-y-12">
-            {education.map((edu, index) => (
+            {education.map((edu, index: number) => (
               <div
                 key={index}
                 className={`relative flex flex-col md:flex-row items-start md:items-center gap-8 ${
@@ -139,18 +126,20 @@ export function EducationSection() {
                               <Calendar className="h-4 w-4" />
                               <span>{edu.period}</span>
                             </div>
-                            <Badge
-                              variant="outline"
-                              className="bg-green-100 text-green-700 border-green-200 dark:bg-green-900 dark:text-green-300"
-                            >
-                              GPA: {edu.gpa}
-                            </Badge>
+                            {edu.gpa && (
+                              <Badge
+                                variant="outline"
+                                className="bg-green-100 text-green-700 border-green-200 dark:bg-green-900 dark:text-green-300"
+                              >
+                                GPA: {edu.gpa}
+                              </Badge>
+                            )}
                           </div>
 
                           <div className="flex items-center gap-2 mb-3">
-                            <BookOpen className="h-4 w-4 text-blue-500" />
+                            <BookOpen className="h-4 w-4 text-primary" />
                             <span className="text-sm font-medium gradient-text-secondary">
-                              Focus: {edu.focus}
+                              {t.education.focus}: {edu.focus}
                             </span>
                           </div>
                         </div>
@@ -159,23 +148,25 @@ export function EducationSection() {
 
                     <CardContent className="pt-0">
                       <div className="grid md:grid-cols-2 gap-6">
-                        <div>
-                          <div className="flex items-center gap-2 mb-3">
-                            <BookOpen className="h-4 w-4 text-purple-500" />
-                            <h4 className="font-semibold gradient-text">Thesis</h4>
+                        {(t.education.items[index]?.thesis ?? edu.thesis) && (
+                          <div>
+                            <div className="flex items-center gap-2 mb-3">
+                              <BookOpen className="h-4 w-4 text-primary" />
+                              <h4 className="font-semibold gradient-text">{t.education.thesis}</h4>
+                            </div>
+                            <p className="text-muted-foreground text-sm mb-4 italic bg-muted/30 p-3 rounded-lg">
+                              「{t.education.items[index]?.thesis ?? edu.thesis}」
+                            </p>
                           </div>
-                          <p className="text-muted-foreground text-sm mb-4 italic bg-muted/30 p-3 rounded-lg">
-                            "{edu.thesis}"
-                          </p>
-                        </div>
+                        )}
 
-                        <div>
+                        <div className={(t.education.items[index]?.thesis ?? edu.thesis) ? "" : "md:col-span-2"}>
                           <div className="flex items-center gap-2 mb-3">
-                            <Award className="h-4 w-4 text-yellow-500" />
-                            <h4 className="font-semibold gradient-text-secondary">Achievements</h4>
+                            <Award className="h-4 w-4 text-amber-500" />
+                            <h4 className="font-semibold gradient-text-secondary">{t.education.achievements}</h4>
                           </div>
                           <ul className="space-y-2">
-                            {edu.achievements.map((achievement, achIndex) => (
+                            {(t.education.items[index]?.achievements ?? edu.achievements).map((achievement, achIndex) => (
                               <li key={achIndex} className="flex items-start gap-3 text-sm">
                                 <div
                                   className={`w-2 h-2 rounded-full bg-gradient-to-r ${edu.color} mt-2 flex-shrink-0`}
@@ -200,11 +191,11 @@ export function EducationSection() {
         {/* Relevant Coursework Section */}
         <div className="max-w-6xl mx-auto">
           <Card className="glass border-white/10 shadow-strong overflow-hidden">
-            <div className="h-3 bg-gradient-to-r from-indigo-500 via-blue-500 to-cyan-500"></div>
+            <div className="h-3 bg-gradient-to-r from-red-700 via-rose-500 to-amber-500"></div>
             <CardHeader className="text-center">
               <div className="flex items-center justify-center gap-3 mb-4">
                 <Users className="h-6 w-6 text-blue-500" />
-                <CardTitle className="text-2xl gradient-text">Relevant Coursework</CardTitle>
+                <CardTitle className="text-2xl gradient-text">{t.education.relevantCoursework}</CardTitle>
               </div>
             </CardHeader>
             <CardContent>
