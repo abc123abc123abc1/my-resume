@@ -1,7 +1,6 @@
 # My Resume | AI Engineer Portfolio
 
 A modern, responsive portfolio website for an AI/ML engineer, built with Next.js, React, TypeScript, and Tailwind CSS. The site presents professional experience, featured projects, education, certifications, testimonials, blog content, and a Telegram-powered contact form in a clean bilingual interface.
-'email: olivercawson@gmail.com see this link https://drive.google.com/drive/folders/14b-arCp0kC8TBBEjI7gginzu23wuDFlp?usp=drive_link'
 
 ## Overview
 
